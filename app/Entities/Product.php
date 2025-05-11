@@ -4,7 +4,53 @@ namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     schema="Product",
+ *     type="object",
+ *     title="Product",
+ *     description="Modelo de Produto",
+ *     required={"name", "description", "price", "category"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="string",
+ *         format="uuid",
+ *         description="ID único do produto (UUID)",
+ *         example="550e8400-e29b-41d4-a716-446655440000"
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nome do produto",
+ *         example="Smartphone XYZ"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         minLength=10,
+ *         description="Descrição detalhada do produto",
+ *         example="Um smartphone incrível com câmera de alta resolução e bateria de longa duração"
+ *     ),
+ *     @OA\Property(
+ *         property="price",
+ *         type="number",
+ *         format="float",
+ *         minimum=0.01,
+ *         description="Preço do produto",
+ *         example=1299.99
+ *     ),
+ *     @OA\Property(
+ *         property="category",
+ *         type="string",
+ *         maxLength=100,
+ *         description="Categoria do produto",
+ *         example="Eletrônicos"
+ *     )
+ * )
+ */
 #[ORM\Entity]
 #[ORM\Table(name: 'products')]
 class Product
