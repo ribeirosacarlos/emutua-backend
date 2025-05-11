@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  # Serviço do Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel_network
+
+  # Servidor Web (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: laravel_nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - laravel_network
+
+  # PostgreSQL (seu serviço atual)
+  postgres:
+    image: postgres:15
+    container_name: laravel_postgres
+    environment:
+      POSTGRES_DB: emutua_db
+      POSTGRES_USER: emutua_user
+      POSTGRES_PASSWORD: eLenJwgE6ROilBwhNHur7nxDQsGji8t5
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - laravel_network
+
+volumes:
+  postgres_data:
+
+networks:
+  laravel_network:
+    driver: bridge
