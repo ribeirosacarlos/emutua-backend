@@ -1,70 +1,104 @@
-API Laravel 10 + Doctrine + PostgreSQL
-📋 Descrição
+# API Laravel 10 + Doctrine + PostgreSQL
+
+## 📋 Descrição
 
 API desenvolvida em Laravel 10 utilizando Doctrine ORM, PostgreSQL como banco de dados e Docker para facilitar o ambiente de desenvolvimento. A documentação dos endpoints está disponível via Swagger.
 
-🔧 Requisitos
+---
 
-Docker
+## 🔧 Requisitos
 
-Docker Compose
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
 
-Git
+---
 
-🚀 Instalação e Uso
-Clone o repositório
-git clone [URL_DO_REPOSITORIO]
-cd [NOME_DO_PROJETO]
+## 🚀 Instalação e Uso
 
-Configure as variáveis de ambiente
-cp .env.example .env
+1. **Clone o repositório**
 
+   ```bash
+   git clone https://github.com/ribeirosacarlos/emutua-backend.git
+   cd emutua-backend
+   ```
 
-Edite o arquivo .env se necessário, mas as credenciais padrão já funcionam para o ambiente local.
+2. **Configure as variáveis de ambiente**
 
-Suba os containers
-docker-compose up -d
+   ```bash
+   cp .env.example .env
+   ```
 
-Instale as dependências do Laravel
-docker exec -it laravel_app composer install
+   > Edite o arquivo `.env` se necessário, mas as credenciais padrão já funcionam para o ambiente local.
 
-Gere a chave da aplicação
-docker exec -it laravel_app php artisan key:generate
+3. **Suba os containers**
 
-Atualize o schema do banco de dados via Doctrine
-docker exec -it laravel_app php artisan doctrine:schema:update --force
+   ```bash
+   docker-compose up -d
+   ```
 
-Rode o seeder para popular a base
-docker exec -it laravel_app php artisan db:seed --class=ProductSeeder
+4. **Instale as dependências do Laravel**
 
-🗄️ Banco de Dados
+   ```bash
+   docker exec -it laravel_app composer install
+   ```
 
-O banco de dados PostgreSQL é inicializado automaticamente via Docker.
+5. **Gere a chave da aplicação**
 
-As credenciais e configurações estão no arquivo .env.example.
+   ```bash
+   docker exec -it laravel_app php artisan key:generate
+   ```
 
-📑 Documentação da API
+6. **Atualize o schema do banco de dados via Doctrine**
+
+   ```bash
+   docker exec -it laravel_app php artisan doctrine:schema:update --force
+   ```
+
+7. **Rode o seeder para popular a base**
+
+   ```bash
+   docker exec -it laravel_app php artisan db:seed --class=ProductSeeder
+   ```
+
+---
+
+## 🗄️ Banco de Dados
+
+- O banco de dados PostgreSQL é inicializado automaticamente via Docker.
+- As credenciais e configurações estão no arquivo `.env.example`.
+
+---
+
+## 📑 Documentação da API
 
 A documentação interativa dos endpoints está disponível em:
 
+```
 http://localhost:8000/api/documentation
+```
 
+> A API foi documentada utilizando Swagger, o que permite explorar os endpoints e seus parâmetros de forma interativa.
 
-A API foi documentada utilizando Swagger, o que permite explorar os endpoints e seus parâmetros de forma interativa.
+---
 
-🧪 Testes
+## 🧪 Testes
 
 Para rodar os testes unitários:
 
+```bash
 docker exec -it laravel_app php artisan test
-
+```
 
 Ou, para rodar apenas o teste de produtos:
 
+```bash
 docker exec -it laravel_app php artisan test --filter=ProductTest
+```
 
-📝 Observações
+---
 
-Certifique-se de que as portas 8000 (API) e 5432 (PostgreSQL) estejam livres em sua máquina.
+## 📝 Observações
 
-Para customizar as configurações do banco, edite o arquivo .env.
+- Certifique-se de que as portas 8000 (API) e 5432 (PostgreSQL) estejam livres em sua máquina.
+- Para customizar as configurações do banco, edite o arquivo `.env`.
